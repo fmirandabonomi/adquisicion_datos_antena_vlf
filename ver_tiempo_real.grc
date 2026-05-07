@@ -33,6 +33,30 @@ options:
     state: enabled
 
 blocks:
+- name: bw
+  id: variable
+  parameters:
+    comment: ''
+    value: '10000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1880, 564.0]
+    rotation: 0
+    state: true
+- name: decim
+  id: variable
+  parameters:
+    comment: ''
+    value: int((samp_rate/2)/(bw*(1+fraccion_corte)/2))
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2104, 564.0]
+    rotation: 0
+    state: true
 - name: filename
   id: variable
   parameters:
@@ -45,6 +69,39 @@ blocks:
     coordinate: [784, 64.0]
     rotation: 0
     state: enabled
+- name: fraccion_corte
+  id: variable
+  parameters:
+    comment: ''
+    value: '.25'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1960, 564.0]
+    rotation: 0
+    state: true
+- name: fsint
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 5,0,1,12
+    label: "Sinton\xEDa"
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: 10e3
+    step: '100'
+    stop: 88.2e3
+    value: 10e3
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [504, 484.0]
+    rotation: 0
+    state: true
 - name: samp_rate
   id: variable
   parameters:
@@ -57,6 +114,40 @@ blocks:
     coordinate: [544, 64.0]
     rotation: 0
     state: enabled
+- name: wide_fft_width
+  id: variable
+  parameters:
+    comment: ''
+    value: '8192'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1624, 556.0]
+    rotation: 0
+    state: true
+- name: analog_sig_source_x_0
+  id: analog_sig_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: '1'
+    comment: ''
+    freq: -fsint
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    offset: '0'
+    phase: '0'
+    samp_rate: samp_rate
+    type: complex
+    waveform: analog.GR_COS_WAVE
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1048, 836.0]
+    rotation: 0
+    state: true
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -112,6 +203,22 @@ blocks:
     coordinate: [872, 284.0]
     rotation: 0
     state: enabled
+- name: blocks_float_to_complex_0
+  id: blocks_float_to_complex
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    vlen: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1080, 760.0]
+    rotation: 0
+    state: true
 - name: blocks_multiply_const_vxx_1
   id: blocks_multiply_const_vxx
   parameters:
@@ -184,6 +291,24 @@ blocks:
     coordinate: [1832, 452.0]
     rotation: 0
     state: enabled
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: complex
+    vlen: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1496, 800.0]
+    rotation: 0
+    state: true
 - name: blocks_null_sink_1
   id: blocks_null_sink
   parameters:
@@ -235,6 +360,80 @@ blocks:
     coordinate: [1392, 432.0]
     rotation: 0
     state: enabled
+- name: blocks_null_source_0
+  id: blocks_null_source
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_source: '[[0,],]'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    type: float
+    vlen: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 788.0]
+    rotation: 0
+    state: true
+- name: blocks_streams_to_vector_0
+  id: blocks_streams_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [888, 712.0]
+    rotation: 0
+    state: true
+- name: blocks_streams_to_vector_0_0
+  id: blocks_streams_to_vector
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1304, 864.0]
+    rotation: 0
+    state: true
+- name: blocks_tag_gate_0
+  id: blocks_tag_gate
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    propagate_tags: 'False'
+    single_key: '""'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [640, 352.0]
+    rotation: 0
+    state: true
 - name: blocks_uchar_to_float_0
   id: blocks_uchar_to_float
   parameters:
@@ -295,6 +494,42 @@ blocks:
     coordinate: [1152, 456.0]
     rotation: 0
     state: enabled
+- name: blocks_vector_to_streams_0
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1136, 624.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_to_streams_1
+  id: blocks_vector_to_streams
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_streams: '2'
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1672, 800.0]
+    rotation: 0
+    state: true
 - name: dc_blocker_xx_0
   id: dc_blocker_xx
   parameters:
@@ -344,6 +579,54 @@ blocks:
     coordinate: [1080, 76.0]
     rotation: 0
     state: enabled
+- name: low_pass_filter_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: bw/2
+    decim: decim
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: bw*fraccion_corte/2
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1928, 652.0]
+    rotation: 0
+    state: true
+- name: low_pass_filter_0_0
+  id: low_pass_filter
+  parameters:
+    affinity: ''
+    alias: ''
+    beta: '6.76'
+    comment: ''
+    cutoff_freq: bw/2
+    decim: decim
+    gain: '1'
+    interp: '1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fir_filter_ccf
+    width: bw*fraccion_corte/2
+    win: window.WIN_HAMMING
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1936, 812.0]
+    rotation: 0
+    state: true
 - name: network_socket_pdu_0
   id: network_socket_pdu
   parameters:
@@ -412,10 +695,10 @@ blocks:
     color9: '0'
     comment: ''
     fc: '0'
-    fftsize: '32768'
+    fftsize: wide_fft_width
     freqhalf: 'False'
     grid: 'False'
-    gui_hint: 0,0,12,6
+    gui_hint: 0,0,5,6
     int_max: '10'
     int_min: '-140'
     label1: ''
@@ -431,17 +714,17 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"Espectro antena 1"'
+    name: "\"Espectro antes de sinton\xEDa canal 0\""
     nconnections: '1'
     showports: 'False'
     type: float
-    update_time: '0.10'
+    update_time: wide_fft_width/samp_rate
     wintype: window.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1408, 664.0]
+    coordinate: [1408, 556.0]
     rotation: 0
     state: enabled
 - name: qtgui_waterfall_sink_x_0_0
@@ -473,10 +756,10 @@ blocks:
     color9: '0'
     comment: ''
     fc: '0'
-    fftsize: '32768'
+    fftsize: wide_fft_width
     freqhalf: 'False'
     grid: 'False'
-    gui_hint: 0,6,12,6
+    gui_hint: 0,6,5,6
     int_max: '10'
     int_min: '-140'
     label1: ''
@@ -492,17 +775,139 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"Espectro antena 2"'
+    name: "\"Espectro antes de sinton\xEDa canal 1\""
     nconnections: '1'
     showports: 'False'
     type: float
-    update_time: '0.10'
+    update_time: wide_fft_width/samp_rate
     wintype: window.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1408, 840.0]
+    coordinate: [1408, 660.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_waterfall_sink_x_0_1
+  id: qtgui_waterfall_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    axislabels: 'True'
+    bw: samp_rate/decim
+    color1: '0'
+    color10: '0'
+    color2: '0'
+    color3: '0'
+    color4: '0'
+    color5: '0'
+    color6: '0'
+    color7: '0'
+    color8: '0'
+    color9: '0'
+    comment: ''
+    fc: fsint
+    fftsize: '1024'
+    freqhalf: 'False'
+    grid: 'False'
+    gui_hint: 6,0,5,6
+    int_max: '10'
+    int_min: '-140'
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: "\"Espectro luego de sinton\xEDa canal 0\""
+    nconnections: '1'
+    showports: 'False'
+    type: complex
+    update_time: decim*1024/samp_rate
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2208, 700.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_waterfall_sink_x_0_1_0
+  id: qtgui_waterfall_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    axislabels: 'True'
+    bw: samp_rate/decim
+    color1: '0'
+    color10: '0'
+    color2: '0'
+    color3: '0'
+    color4: '0'
+    color5: '0'
+    color6: '0'
+    color7: '0'
+    color8: '0'
+    color9: '0'
+    comment: ''
+    fc: fsint
+    fftsize: '1024'
+    freqhalf: 'False'
+    grid: 'False'
+    gui_hint: 6,6,5,6
+    int_max: '10'
+    int_min: '-140'
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: "\"Espectro luego de sinton\xEDa canal 1\""
+    nconnections: '1'
+    showports: 'False'
+    type: complex
+    update_time: decim*1024/samp_rate
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2208, 836.0]
     rotation: 0
     state: enabled
 - name: virtual_sink_0
@@ -541,7 +946,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [752, 468.0]
+    coordinate: [832, 548.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0
@@ -554,7 +959,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 700.0]
+    coordinate: [648, 676.0]
     rotation: 0
     state: enabled
 - name: virtual_source_0_0
@@ -567,21 +972,30 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [864, 876.0]
+    coordinate: [656, 764.0]
     rotation: 0
     state: enabled
 
 connections:
+- [analog_sig_source_x_0, '0', blocks_streams_to_vector_0_0, '0']
+- [analog_sig_source_x_0, '0', blocks_streams_to_vector_0_0, '1']
 - [blocks_add_xx_0, '0', blocks_multiply_const_vxx_2, '0']
 - [blocks_add_xx_0_0, '0', blocks_multiply_const_vxx_2_0, '0']
 - [blocks_deinterleave_0, '0', blocks_uchar_to_float_0, '0']
 - [blocks_deinterleave_0, '1', blocks_uchar_to_float_0_0, '0']
 - [blocks_deinterleave_0, '2', blocks_uchar_to_float_0_1, '0']
 - [blocks_deinterleave_0, '3', blocks_uchar_to_float_0_0_0, '0']
+- [blocks_float_to_complex_0, '0', blocks_multiply_xx_0, '0']
 - [blocks_multiply_const_vxx_1, '0', blocks_add_xx_0, '1']
 - [blocks_multiply_const_vxx_1_0, '0', blocks_add_xx_0_0, '1']
 - [blocks_multiply_const_vxx_2, '0', dc_blocker_xx_0_0, '0']
 - [blocks_multiply_const_vxx_2_0, '0', dc_blocker_xx_0, '0']
+- [blocks_multiply_xx_0, '0', blocks_vector_to_streams_1, '0']
+- [blocks_null_source_0, '0', blocks_float_to_complex_0, '1']
+- [blocks_streams_to_vector_0, '0', blocks_float_to_complex_0, '0']
+- [blocks_streams_to_vector_0, '0', blocks_vector_to_streams_0, '0']
+- [blocks_streams_to_vector_0_0, '0', blocks_multiply_xx_0, '1']
+- [blocks_tag_gate_0, '0', blocks_deinterleave_0, '0']
 - [blocks_uchar_to_float_0, '0', blocks_add_xx_0, '0']
 - [blocks_uchar_to_float_0, '0', blocks_null_sink_1_0, '0']
 - [blocks_uchar_to_float_0_0, '0', blocks_multiply_const_vxx_1, '0']
@@ -589,14 +1003,19 @@ connections:
 - [blocks_uchar_to_float_0_0_0, '0', blocks_multiply_const_vxx_1_0, '0']
 - [blocks_uchar_to_float_0_1, '0', blocks_add_xx_0_0, '0']
 - [blocks_uchar_to_float_0_1, '0', blocks_null_sink_1_0_0, '0']
+- [blocks_vector_to_streams_0, '0', qtgui_waterfall_sink_x_0, '0']
+- [blocks_vector_to_streams_0, '1', qtgui_waterfall_sink_x_0_0, '0']
+- [blocks_vector_to_streams_1, '0', low_pass_filter_0, '0']
+- [blocks_vector_to_streams_1, '1', low_pass_filter_0_0, '0']
 - [dc_blocker_xx_0, '0', virtual_sink_0_0, '0']
 - [dc_blocker_xx_0_0, '0', virtual_sink_0, '0']
+- [low_pass_filter_0, '0', qtgui_waterfall_sink_x_0_1, '0']
+- [low_pass_filter_0_0, '0', qtgui_waterfall_sink_x_0_1_0, '0']
 - [network_socket_pdu_0, pdus, pdu_pdu_to_tagged_stream_0, pdus]
-- [pdu_pdu_to_tagged_stream_0, '0', blocks_deinterleave_0, '0']
+- [pdu_pdu_to_tagged_stream_0, '0', blocks_tag_gate_0, '0']
 - [pdu_pdu_to_tagged_stream_0, '0', virtual_sink_1, '0']
-- [virtual_source_0, '0', qtgui_waterfall_sink_x_0, '0']
-- [virtual_source_0_0, '0', qtgui_waterfall_sink_x_0_0, '0']
+- [virtual_source_0, '0', blocks_streams_to_vector_0, '0']
+- [virtual_source_0_0, '0', blocks_streams_to_vector_0, '1']
 
 metadata:
   file_format: 1
-  grc_version: 3.10.12.0
